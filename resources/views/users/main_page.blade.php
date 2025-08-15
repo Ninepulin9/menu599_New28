@@ -9,7 +9,74 @@ use App\Models\Config;
 
 $config = Config::first();
 ?>
+
+<!-- Google Translate Script -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'th', // ภาษาต้นฉบับ (ไทย)
+        includedLanguages: 'en,th', // เฉพาะภาษาอังกฤษและไทย
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 <style>
+    /* Google Translate Widget Styles */
+    .translate-widget {
+    position: fixed;
+    top: 15px; 
+    right: 15px; 
+    z-index: 10000;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px; 
+    padding: 2px 6px; 
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1); 
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: scale(0.85); 
+    transform-origin: top right; 
+}
+
+    
+    .goog-te-gadget {
+        font-family: inherit !important;
+        font-size: 11px !important;
+    }
+
+    .goog-te-gadget-simple {
+        background: transparent !important;
+        border: none !important;
+        padding: 2px !important;
+        border-radius: 10px !important;
+        font-size: 11px !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value {
+        color: #333 !important;
+        font-weight: 500 !important;
+        font-size: 11px !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value span {
+        color: #666 !important;
+        font-size: 11px !important;
+    }
+
+    .goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+        display: none;
+    }
+
+    .goog-te-banner-frame {
+        display: none !important;
+    }
+
+    body {
+        top: 0 !important;
+    }
+
     .carousel-item img {
         width: 100%;
         height: 150px;
@@ -147,7 +214,56 @@ $config = Config::first();
         font-size: 0.9rem;
         margin: 0;
     }
+
+    /* สำหรับมือถือ */
+    @media (max-width: 768px) {
+        .translate-widget {
+            top: 15px;
+            right: 15px;
+            padding: 6px 10px;
+            border-radius: 15px;
+        }
+        
+        .goog-te-gadget-simple {
+            font-size: 8px !important;
+            padding: 4px !important;
+        }
+        
+        .goog-te-gadget-simple .goog-te-menu-value {
+            font-size: 8px !important;
+        }
+        
+        .goog-te-gadget-simple .goog-te-menu-value span {
+            font-size: 8px !important;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .translate-widget {
+            top: 10px;
+            right: 10px;
+            padding: 5px 8px;
+        }
+        
+        .goog-te-gadget-simple {
+            font-size: 11px !important;
+            padding: 3px !important;
+        }
+        
+        .goog-te-gadget-simple .goog-te-menu-value {
+            font-size: 11px !important;
+        }
+        
+        .goog-te-gadget-simple .goog-te-menu-value span {
+            font-size: 11px !important;
+        }
+    }
 </style>
+
+<!-- Google Translate Widget -->
+<div class="translate-widget">
+    <div id="google_translate_element"></div>
+</div>
 
 @if(count($promotion) > 0)
 <div id="carouselCaptions" class="carousel slide" data-bs-ride="carousel">

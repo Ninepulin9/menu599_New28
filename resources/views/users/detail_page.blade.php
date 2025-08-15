@@ -14,7 +14,71 @@
     $allCategories = Categories::get();
 
     ?>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'th', // ภาษาต้นฉบับ (ไทย)
+            includedLanguages: 'en,th', // เฉพาะภาษาอังกฤษและไทย
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
+/* Google Translate Widget Styles */
+.translate-widget {
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 4px 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.goog-te-gadget {
+    font-family: inherit !important;
+    font-size: 11px !important;
+}
+
+.goog-te-gadget-simple {
+    background: transparent !important;
+    border: none !important;
+    padding: 2px !important;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value {
+    color: #333 !important;
+    font-weight: 500 !important;
+    font-size: 11px !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value span {
+    color: #666 !important;
+    font-size: 11px !important;
+}
+
+.goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+    display: none;
+}
+
+/* ซ่อน Google Translate Banner ด้านบน */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
 
 .header-section {
     background: linear-gradient(135deg, #6cd4e2ff 0%, #8fd8e0ff 100%);
@@ -25,6 +89,7 @@
     top: 0;
     z-index: 100;
     margin: -15px -15px 15px -15px;
+    position: relative;
 }
 
 .page-title {
@@ -386,7 +451,18 @@
 
 
 @media (max-width: 768px) {
+    .translate-widget {
+        top: 15px; 
+        right: 15px; 
+        padding: 3px 6px;
+        border-radius: 12px;
+    }
     
+    .goog-te-gadget-simple {
+        font-size: 10px !important;
+        padding: 2px !important;
+    }
+}
     
     .page-title {
         font-size: 20px;
@@ -424,10 +500,17 @@
     .title-food {
         font-size: 24px;
     }
-}
+
 
 @media (max-width: 576px) {
-    /* Extra small devices */
+    .translate-widget {
+        top: 10px;
+        right: 10px;
+        padding: 2px 5px;
+        border-radius: 10px;
+    }
+
+    
     .header-section {
         padding: 10px 10px 14px 10px;
         border-radius: 0 0 20px 20px;
@@ -451,6 +534,11 @@
     }
 }
     </style>
+
+    <!-- Google Translate Widget -->
+    <div class="translate-widget">
+        <div id="google_translate_element"></div>
+    </div>
 
     <!-- Header Section -->
     <div class="header-section">
@@ -780,7 +868,15 @@
         function highlightText(text, query) {
             if (!query.trim()) return text;
             
-            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\        function searchMenus(query) {
+            if (!query.trim()) {
+                hideSearchResults();
+                return;
+            }
+            
+            const results = menuData.filter(item => 
+                item.name.toLowerCase().includes(query.toLowerCase()) ||
+                (item.detail')})`, 'gi');
             return text.replace(regex, '<span class="search-highlight">$1</span>');
         }
         
