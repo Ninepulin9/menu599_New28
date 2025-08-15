@@ -14,74 +14,10 @@
     $allCategories = Categories::get();
 
     ?>
-
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'th', // ภาษาต้นฉบับ (ไทย)
-            includedLanguages: 'en,th', // เฉพาะภาษาอังกฤษและไทย
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <style>
-/* Google Translate Widget Styles */
-.translate-widget {
-    position: fixed; 
-    top: 20px; 
-    right: 20px; 
-    z-index: 1001;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 4px 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.goog-te-gadget {
-    font-family: inherit !important;
-    font-size: 11px !important;
-}
-
-.goog-te-gadget-simple {
-    background: transparent !important;
-    border: none !important;
-    padding: 2px !important;
-    border-radius: 10px !important;
-    font-size: 11px !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value {
-    color: #333 !important;
-    font-weight: 500 !important;
-    font-size: 11px !important;
-}
-
-.goog-te-gadget-simple .goog-te-menu-value span {
-    color: #666 !important;
-    font-size: 11px !important;
-}
-
-.goog-te-gadget .goog-te-gadget-simple .goog-te-menu-value span:first-child {
-    display: none;
-}
-
-/* ซ่อน Google Translate Banner ด้านบน */
-.goog-te-banner-frame {
-    display: none !important;
-}
-
-body {
-    top: 0 !important;
-}
 
 .header-section {
-    background: linear-gradient(135deg, #6cd4e2ff 0%, #8fd8e0ff 100%);
+    background: linear-gradient(135deg, {{ $config->color1 ?? '#6cd4e2ff' }} 0%, {{ $config->color2 ?? '#8fd8e0ff' }} 100%);
     padding: 15px 15px 20px 15px;
     border-radius: 0 0 25px 25px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.1);
@@ -89,7 +25,6 @@ body {
     top: 0;
     z-index: 100;
     margin: -15px -15px 15px -15px;
-    position: relative;
 }
 
 .page-title {
@@ -198,7 +133,7 @@ body {
 
 .category-pill.active {
     background: white;
-    color: #00bcd4;
+    color: {{ $config->color1 ?? '#00bcd4' }};
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
@@ -281,7 +216,7 @@ body {
 .title-food {
     font-size: 30px;
     font-weight: bold;
-    color: #000000;
+    color: {{ $config->color_font ?? '#000000' }};
 }
 
 .card-food {
@@ -293,6 +228,7 @@ body {
 
 .card-title {
     font-size: 15px;
+    color: {{ $config->color_font ?? '#000000' }};
 }
 
 /* Product Card */
@@ -312,7 +248,7 @@ body {
     bottom: 5px;
     right: 20px;
     transform: translateX(50%);
-    border: 1px solid #30acff;
+    border: 1px solid {{ $config->color1 ?? '#30acff' }};
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     padding: 2px 10px;
@@ -322,10 +258,10 @@ body {
 }
 
 .amount-custom {
-    border: 1px solid #30acff;
+    border: 1px solid {{ $config->color1 ?? '#30acff' }};
     border-radius: 50%;
     padding: 0px 8px;
-    color: #30acff;
+    color: {{ $config->color1 ?? '#30acff' }};
 }
 
 
@@ -362,8 +298,8 @@ body {
 }
 
 .btn-plus {
-    background-color: #82f3fd;
-    color: #ffff;
+    background: linear-gradient(135deg, {{ $config->color1 ?? '#82f3fd' }}, {{ $config->color2 ?? '#b2f9ff' }});
+    color: #ffffff;
     border-radius: 50%;
     border: 0px solid #333;
     font-size: 20px;
@@ -373,8 +309,8 @@ body {
 }
 
 .btn-minus {
-    background-color: #b2f9ff;
-    color: #ffff;
+    background: linear-gradient(135deg, {{ $config->color1 ?? '#82f3fd' }}, {{ $config->color2 ?? '#b2f9ff' }});
+    color: #ffffff;
     border-radius: 50%;
     border: 0px solid #333;
     font-size: 20px;
@@ -449,20 +385,21 @@ body {
     background-color: #f8f9fa;
 }
 
+/* ปุ่มหลักตาม config */
+.btn-primary {
+    background: linear-gradient(to right, {{ $config->color1 ?? '#007bff' }}, {{ $config->color2 ?? '#0056b3' }}) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, {{ $config->color2 ?? '#0056b3' }}, {{ $config->color1 ?? '#007bff' }}) !important;
+    transform: translateY(-1px);
+}
+
 
 @media (max-width: 768px) {
-    .translate-widget {
-        top: 15px; 
-        right: 15px; 
-        padding: 3px 6px;
-        border-radius: 12px;
-    }
     
-    .goog-te-gadget-simple {
-        font-size: 10px !important;
-        padding: 2px !important;
-    }
-}
     
     .page-title {
         font-size: 20px;
@@ -500,17 +437,10 @@ body {
     .title-food {
         font-size: 24px;
     }
-
+}
 
 @media (max-width: 576px) {
-    .translate-widget {
-        top: 10px;
-        right: 10px;
-        padding: 2px 5px;
-        border-radius: 10px;
-    }
-
-    
+    /* Extra small devices */
     .header-section {
         padding: 10px 10px 14px 10px;
         border-radius: 0 0 20px 20px;
@@ -534,11 +464,6 @@ body {
     }
 }
     </style>
-
-    <!-- Google Translate Widget -->
-    <div class="translate-widget">
-        <div id="google_translate_element"></div>
-    </div>
 
     <!-- Header Section -->
     <div class="header-section">
@@ -868,15 +793,8 @@ body {
         function highlightText(text, query) {
             if (!query.trim()) return text;
             
-            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\        function searchMenus(query) {
-            if (!query.trim()) {
-                hideSearchResults();
-                return;
-            }
-            
-            const results = menuData.filter(item => 
-                item.name.toLowerCase().includes(query.toLowerCase()) ||
-                (item.detail')})`, 'gi');
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\                resultItem.addEventListener('click', function() {
+                    const menuCard = document.querySelector(`[data-id="${item.id}"]`')})`, 'gi');
             return text.replace(regex, '<span class="search-highlight">$1</span>');
         }
         
