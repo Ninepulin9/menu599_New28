@@ -9,36 +9,40 @@
     <style>
         @media print {
             @page { size: A4; margin: 1cm; }
-            body { margin: 0; padding: 0; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4; }
+            body { margin: 0; padding: 0; font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; }
             .no-print { display: none !important; }
         }
-        body { font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; background-color: #f0f0f0; }
-        .print-wrapper { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .no-print { display: block; text-align: center; padding: 10px 20px; }
-        .badge { display:inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; vertical-align: middle; }
+        body { font-family: 'Courier New', monospace; font-size: 16px; line-height: 1.5; margin: 0; padding: 0; background-color: #f0f0f0; }
+        .print-wrapper { width: 100%; max-width: 650px; margin: 0 auto; padding: 20px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .no-print { display: block; text-align: center; padding: 12px 20px; }
+        .badge { display:inline-block; padding: 4px 10px; border-radius: 12px; font-size: 14px; vertical-align: middle; }
         .badge.ok { background:#d4edda; color:#155724; }
         .badge.err { background:#fdecea; color:#611a15; }
         /* สำหรับ preview HTML จาก payload */
-        .pv-line { border-top: 1px dashed #000; margin: 8px 0; }
-        .pv-text { margin: 2px 0; }
+        .pv-line { border-top: 1px dashed #000; margin: 10px 0; }
+        .pv-text { margin: 3px 0; font-size: 16px; }
         .pv-text.bold { font-weight: bold; }
-        .pv-text.size2 { font-size: 18px; }
-        .pv-row { display: flex; width: 100%; }
-        .pv-col { padding: 2px 4px; box-sizing: border-box; }
+        .pv-text.size2 { font-size: 22px; }
+        .pv-row { display: flex; width: 100%; margin: 2px 0; }
+        .pv-col { padding: 4px 6px; box-sizing: border-box; font-size: 16px; }
         .pv-right { text-align: right; }
         .pv-center { text-align: center; }
-        .pv-table { border: 1px solid #000; border-collapse: collapse; width:100%; margin:10px 0; }
-        .pv-table th, .pv-table td { border:1px solid #000; padding:6px; }
+        .pv-table { border: 1px solid #000; border-collapse: collapse; width:100%; margin:12px 0; }
+        .pv-table th, .pv-table td { border:1px solid #000; padding:8px; font-size: 16px; }
         .pv-table th { background:#f5f5f5; text-align:center; font-weight: bold; }
         .preview-mode { background-color: #f8f9fa !important; padding: 20px; }
-        .preview-mode .print-wrapper { margin: 0 auto; background-color: white; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 8px; padding: 20px; max-width: 600px; }
+        .preview-mode .print-wrapper { margin: 0 auto; background-color: white; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius: 8px; padding: 25px; max-width: 650px; }
+        
+        /* ปรับขนาดปุ่มให้ใหญ่ขึ้นด้วย */
+        button { padding: 12px 24px; font-size: 16px; cursor: pointer; border: 1px solid #ccc; border-radius: 4px; }
+        button:hover { background-color: #f5f5f5; }
     </style>
 </head>
 <body>
     <div class="no-print">
-        <button id="btnPrint" style="padding: 10px 20px; font-size: 14px;">พิมพ์</button>
-        <button onclick="window.close()" style="padding: 10px 20px; font-size: 14px; margin-left: 10px;">ปิด</button>
-        <span id="printerStatus" style="margin-left:12px;">สถานะเครื่องพิมพ์: <span class="badge err">ไม่ทราบ</span></span>
+        <button id="btnPrint" style="padding: 12px 24px; font-size: 16px;">พิมพ์</button>
+        <button onclick="window.close()" style="padding: 12px 24px; font-size: 16px; margin-left: 10px;">ปิด</button>
+        <span id="printerStatus" style="margin-left:15px;">สถานะเครื่องพิมพ์: <span class="badge err">ไม่ทราบ</span></span>
     </div>
 
     <div class="print-wrapper">
@@ -367,7 +371,6 @@
                 handlePrint().catch(console.error);
             });
 
-            // Auto print เฉพาะบางชนิด (ตามเดิม)
             if (!isInIframe) {
                 const t = (data?.type || '').toLowerCase();
                 if (t === 'order_cook') {
